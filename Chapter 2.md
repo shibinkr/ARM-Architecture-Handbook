@@ -298,3 +298,45 @@ Each level maintains its own **vector table** and **stack pointer**, allowing fi
 ---
 
 In essence, the ARM ISA represents a **balance between simplicity and scalability** — powering everything from microcontrollers to supercomputers with the same clean, efficient instruction foundation.
+
+
+```mermaid
+graph LR
+    ARMv8["ARMv8 CPU"] --> AArch32["32-bit Execution State (AArch32)"]
+    ARMv8 --> AArch64["64-bit Execution State (AArch64)"]
+
+    %% AArch32
+    AArch32 --> ARM32["ARM32 Instruction Set"]
+    AArch32 --> Thumb2["Thumb-2 Instruction Set"]
+    AArch32 --> EL32_User["User Mode"]
+    AArch32 --> EL32_FIQ["FIQ Mode"]
+    AArch32 --> EL32_IRQ["IRQ Mode"]
+    AArch32 --> EL32_SVC["Supervisor Mode"]
+    AArch32 --> EL32_ABT["Abort Mode"]
+    AArch32 --> EL32_UND["Undefined Mode"]
+    EL32_User --> R0_R12["General Purpose Registers R0-R12"]
+    EL32_User --> R13_R15["SP, LR, PC"]
+    EL32_User --> CPSR_User["CPSR"]
+    EL32_FIQ --> Banked_FIQ["Banked Registers R8-R12, SP, LR, SPSR"]
+
+    %% AArch64
+    AArch64 --> A64["A64 Instruction Set"]
+    AArch64 --> XRegs["X0-X30 64-bit Registers + SP, PC"]
+    AArch64 --> VRegs["V0-V31 128-bit SIMD/FP Registers"]
+
+    AArch64 --> EL0["EL0 - User"]
+    AArch64 --> EL1["EL1 - Kernel/OS"]
+    AArch64 --> EL2["EL2 - Hypervisor"]
+    AArch64 --> EL3["EL3 - Secure Monitor"]
+
+    EL0 --> XRegs_EL0["X0-X30, SP_EL0"]
+    EL1 --> XRegs_EL1["X0-X30, SP_EL1"]
+    EL2 --> XRegs_EL2["X0-X30, SP_EL2"]
+    EL3 --> XRegs_EL3["X0-X30, SP_EL3"]
+
+    %% Notes
+    ARM32 -.-> |"Compiler / OS Target"| ARM32_OS["ARM32 target"]
+    AArch64 -.-> |"Compiler / OS Target"| ARM64_OS["ARM64 target"]
+
+
+```
