@@ -61,6 +61,99 @@ graph TD
         R0[R0-R12] --> SP[SP] --> LR[LR] --> PC[PC]
     end
 ```
+```mermaid
+graph LR
+    %% Modes
+    User[User Mode] 
+    FIQ[FIQ Mode] 
+    IRQ[IRQ Mode] 
+    SVC[Supervisor Mode] 
+    ABT[Abort Mode] 
+    UND[Undefined Mode] 
+    SYS[System Mode]
+
+    %% General-purpose registers
+    GP[R0-R12 General Purpose]
+    SP[R13 SP]
+    LR[R14 LR]
+    PC[R15 PC]
+    CPSR[CPSR Current Program Status Register]
+    SPSR[SPSR Saved Program Status Register]
+
+    %% FIQ banked registers
+    R8_R12_fiq[R8-R12 FIQ only]
+    SP_fiq[R13 FIQ SP]
+    LR_fiq[R14 FIQ LR]
+    SPSR_fiq[SPSR FIQ]
+
+    %% Other modes banked registers
+    SP_irq[R13 IRQ SP]
+    LR_irq[R14 IRQ LR]
+    SPSR_irq[SPSR IRQ]
+
+    SP_svc[R13 SVC SP]
+    LR_svc[R14 SVC LR]
+    SPSR_svc[SPSR SVC]
+
+    SP_abt[R13 ABT SP]
+    LR_abt[R14 ABT LR]
+    SPSR_abt[SPSR ABT]
+
+    SP_und[R13 UND SP]
+    LR_und[R14 UND LR]
+    SPSR_und[SPSR UND]
+
+    %% Connections: All modes have access to general-purpose registers
+    User --> GP
+    User --> SP
+    User --> LR
+    User --> PC
+    User --> CPSR
+
+    SYS --> GP
+    SYS --> SP
+    SYS --> LR
+    SYS --> PC
+    SYS --> CPSR
+
+    FIQ --> R8_R12_fiq
+    FIQ --> SP_fiq
+    FIQ --> LR_fiq
+    FIQ --> SPSR_fiq
+    FIQ --> GP
+    FIQ --> PC
+    FIQ --> CPSR
+
+    IRQ --> SP_irq
+    IRQ --> LR_irq
+    IRQ --> SPSR_irq
+    IRQ --> GP
+    IRQ --> PC
+    IRQ --> CPSR
+
+    SVC --> SP_svc
+    SVC --> LR_svc
+    SVC --> SPSR_svc
+    SVC --> GP
+    SVC --> PC
+    SVC --> CPSR
+
+    ABT --> SP_abt
+    ABT --> LR_abt
+    ABT --> SPSR_abt
+    ABT --> GP
+    ABT --> PC
+    ABT --> CPSR
+
+    UND --> SP_und
+    UND --> LR_und
+    UND --> SPSR_und
+    UND --> GP
+    UND --> PC
+    UND --> CPSR
+
+```
+
 
 ```mermaid
 graph TD
