@@ -95,4 +95,3 @@
 * Debugging unaligned accesses
 * Cache coherency and memory ordering issues
 
-This index can serve as the backbone for a comprehensive ARM ISA handbook for developers, covering from fundamentals to advanced programming and optimization.
